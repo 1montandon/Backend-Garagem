@@ -22,12 +22,19 @@ class LivroSerializer(ModelSerializer):
         fields = "__all__"
 
 class LivroListSerializer(ModelSerializer):
-    capa = ImageSerializer(required=False)
+    capa = ImageSerializer(
+        required=False,
+        read_only=True
+    )
     class Meta:
         model = Livro
         fields = ("id", "titulo", "preco", "capa")
 
 class LivroRetrieveSerializer(ModelSerializer):
+    capa = ImageSerializer(
+    required=False,
+    read_only=True
+    )
     class Meta:
         model = Livro
         fields = "__all__"
