@@ -51,8 +51,51 @@ class UserAdmin(BaseUserAdmin):
     )
 
 
-admin.site.register(models.User, UserAdmin)
-admin.site.register(models.Categoria)
-admin.site.register(models.Editora)
-admin.site.register(models.Autor)
-admin.site.register(models.Livro)
+# admin.site.register(models.User, UserAdmin)
+# admin.site.register(models.Categoria)
+# admin.site.register(models.Editora)
+# admin.site.register(models.Autor)
+# admin.site.register(models.Livro)
+
+from core.models import Autor, Categoria, Editora, Livro, User
+
+
+@admin.register(User)
+class UserAdmin(UserAdmin):
+    list_display = ("email", "name", "is_staff")
+    search_fields = ("email", "name")
+    list_filter = ("is_staff", "is_superuser")
+    ordering = ("email", "name")
+
+
+@admin.register(Autor)
+class AutorAdmin(admin.ModelAdmin):
+    list_display = ("nome", "email")
+    search_fields = ("nome", "email")
+    list_filter = ("nome", "email")
+    ordering = ("nome", "email")
+    list_per_page = 10
+
+@admin.register(Categoria)
+class CategoriaAdmin(admin.ModelAdmin):
+    list_display = ("descricao",)
+    search_fields = ("descricao",)
+    list_filter = ("descricao",)
+    ordering = ("descricao",)
+    list_per_page = 10
+
+@admin.register(Editora)
+class EditoraAdmin(admin.ModelAdmin):
+    list_display = ("nome", "email", "cidade")
+    search_fields = ("nome", "email", "cidade")
+    list_filter = ("nome", "email", "cidade")
+    ordering = ("nome", "email", "cidade")
+    list_per_page = 10
+
+@admin.register(Livro)
+class LivroAdmin(admin.ModelAdmin):
+    list_display = ("titulo", "editora", "categoria",)
+    search_fields = ("titulo", )
+    list_filter = ("editora", "categoria",)
+    ordering = ("titulo", "editora", "categoria",)
+    list_per_page = 10
