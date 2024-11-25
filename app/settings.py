@@ -148,6 +148,10 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=380),
+    "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
+}
 # PASSAGE_APP_ID = os.getenv("PASSAGE_APP_ID", "app_id")
 # PASSAGE_API_KEY = os.getenv("PASSAGE_API_KEY", "api_key")
 # PASSAGE_AUTH_STRATEGY = 2
