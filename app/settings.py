@@ -151,6 +151,8 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=380),
     "REFRESH_TOKEN_LIFETIME":timedelta(days=1),
+    "TOKEN_OBTAIN_SERIALIZER": "app.token.MyTokenObtainPairSerializer",
+
 }
 # PASSAGE_APP_ID = os.getenv("PASSAGE_APP_ID", "app_id")
 # PASSAGE_API_KEY = os.getenv("PASSAGE_API_KEY", "api_key")
