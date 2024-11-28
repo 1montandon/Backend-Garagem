@@ -18,3 +18,9 @@ class ItensCompra(models.Model):
     compra = models.ForeignKey(Compra, on_delete=models.CASCADE, related_name="itens")
     livro = models.ForeignKey(Livro, on_delete=models.PROTECT)
     quantidade = models.IntegerField(default=1)
+
+
+
+
+
+
