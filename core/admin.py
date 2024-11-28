@@ -57,7 +57,7 @@ class UserAdmin(BaseUserAdmin):
 # admin.site.register(models.Autor)
 # admin.site.register(models.Livro)
 
-from core.models import Autor, Categoria, Editora, Livro, User, Compra
+from core.models import Autor, Categoria, Editora, Livro, User, Compra, ItensCompra
 
 
 @admin.register(User)
@@ -106,4 +106,12 @@ class CompraAdmin(admin.ModelAdmin):
     search_fields = ("usuario", "status")
     list_filter = ("usuario", "status")
     ordering = ("usuario", "status")
+    list_per_page = 10
+
+@admin.register(ItensCompra)
+class ItensCompraAdmin(admin.ModelAdmin):
+    list_display = ("compra", "livro", "quantidade")
+    search_fields = ("compra", "livro", "quantidade")
+    list_filter = ("compra", "livro", "quantidade")
+    ordering = ("compra", "livro", "quantidade")
     list_per_page = 10
