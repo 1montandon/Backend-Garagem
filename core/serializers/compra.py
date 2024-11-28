@@ -13,6 +13,13 @@ class ItensCompraSerializer(ModelSerializer):
         model = ItensCompra
         fields = ("livro", "quantidade", "total")
 
+
+class ItensCompraCreateUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = ItensCompra
+        fields = ("livro", "quantidade")
+
+
 class CompraSerializer(ModelSerializer):
     usuario = CharField(source="usuario.email", read_only=True)
     status = CharField(source="get_status_display", read_only=True)
@@ -21,3 +28,23 @@ class CompraSerializer(ModelSerializer):
     class Meta:
         model = Compra
         fields = ("id", "usuario", "status", "itens", "total")      
+
+
+class CompraCreateUpdateSerializer(ModelSerializer):
+    itens = ItensCompraCreateUpdateSerializer(many=True) # Aqui mudou
+
+    class Meta:
+        model = Compra
+        fields = ("usuario", "itens")
+
+    def create(self, validated_data):
+        print("validated_data", validated_data)
+        itens_data = validated_data.pop("itens")
+        print("itens_data", itens_data)
+
+        compra = Compra.objects.create(**validated_data)
+        for item_data in itens_data:
+            print("item_data", item_data)
+            ItensCompra.objects.create(compra=compra, **item_data)
+        compra.save()
+        return compra
